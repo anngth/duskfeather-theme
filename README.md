@@ -19,7 +19,7 @@ A VS Code theme based on **Night Owl (No Italics)**, in dark and light. Deep car
 
 ```bash
 npm run package
-code --install-extension duskfeather-1.0.0.vsix
+code --install-extension duskfeather-*.vsix
 ```
 
 To try it without installing, open this folder in VS Code and press `F5`. The `demo/` folder has sample files to look at.

@@ -10,7 +10,7 @@
     </linearGradient>
     <clipPath id="vaneClip"><path d="M256 70 C340 140 346 300 266 410 L246 410 C166 300 172 140 256 70 Z"/></clipPath>
   </defs>
-  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#sky)"/>
+  <rect x="10" y="10" width="492" height="492" rx="110" fill="url(#sky)" stroke="#5f7e97" stroke-opacity=".45" stroke-width="4"/>
   <circle cx="118" cy="128" r="5" fill="#d6deeb" opacity=".8"/>
   <circle cx="158" cy="84" r="3" fill="#d6deeb" opacity=".6"/>
   <circle cx="400" cy="400" r="4" fill="#d6deeb" opacity=".5"/>
