@@ -1,0 +1,29 @@
+:root {
+  --accent: #3794ff;
+  --radius: 6px;
+}
+
+.todo-list {
+  max-width: 32rem;
+  margin: 2rem auto;
+  font-family: "Fira Code", monospace;
+}
+
+.todo-list li {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.todo-list li:hover {
+  background: rgba(55, 148, 255, 0.12);
+}
+
+.todo-list li.done {
+  color: #5f7e97;
+  text-decoration: line-through;
+}
+
+@media (prefers-color-scheme: light) {
+  :root { --accent: #005fb8; }
+}
