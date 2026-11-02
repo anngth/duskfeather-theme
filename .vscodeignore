@@ -10,3 +10,6 @@ COLOR-CHANGES*.md
 themes/base-night-owl-light-noitalic.json
 demo/**
 images/icon.svg
+# README screenshots load from GitHub (vsce rewrites the links), not the package.
+images/dark.png
+images/light.png
