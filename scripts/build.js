@@ -74,6 +74,22 @@ const VARIANTS = [
     out: "duskfeather-light-color-theme.json",
     remap: lightRemap,
     comment: "#989fb1", // 2.56:1 on bg.base
+    // Upstream light rules that kept dark-theme colors (1.4–2.6:1 on bg.base),
+    // keyed by rule name.
+    tokenFixes: (p) => ({
+      "Double-Slashed Comment": p.comment,
+      "JSON Property values (string)": "#994cc3",
+      "TypeScript Class Variable Keyword": "#994cc3",
+      "Markdown Links": p.link,
+      "Other Variables in Code Documentations": p.link,
+      "Changed": p.link,
+      "RegExp String": p.link,
+      "Entity Name tag reference in stylesheets": "#0c969b",
+      "CoffeScript Variable Assignment": "#0c969b",
+      "Invalid Unimplemented": "#08916a",
+      "Object": p.fg,
+      "Object Comma": p.fg,
+    }),
   },
 ];
 
@@ -110,6 +126,9 @@ function overrides(p) {
     focusBorder: p.accent,
     // Validation messages; upstream light uses the body text color.
     errorForeground: p.error,
+    "editorWarning.foreground": p.warning,
+    "list.warningForeground": p.warning,
+    "peekViewResult.selectionForeground": p.fgStrong,
     "widget.shadow": p.shadow,
     "scrollbar.shadow": p.shadow,
 
@@ -339,10 +358,20 @@ function build(v) {
     return { ...settings, foreground: p.comment + fg.slice(7) };
   }
 
+  const fixes = v.tokenFixes ? v.tokenFixes(p) : {};
+  const fixed = new Set();
+  function tokenFix(name, settings) {
+    if (!(name in fixes)) return settings;
+    fixed.add(name);
+    return { ...settings, foreground: fixes[name] };
+  }
+
   const tokenColors = base.tokenColors.map((t) => ({
     ...t,
-    settings: commentColor(baseBackground(noItalic(t.settings))),
+    settings: tokenFix(t.name, commentColor(baseBackground(noItalic(t.settings)))),
   }));
+  const missing = Object.keys(fixes).filter((n) => !fixed.has(n));
+  if (missing.length) throw new Error(`${v.name}: no token rule named ${missing.join(", ")}`);
 
   const theme = {
     name: v.name,

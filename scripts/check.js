@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Sanity checks for the generated themes. Run: npm run check
 // Fails if a theme is stale vs build.js, has italics, a card not on bg.base,
-// non-color values, deprecated keys, or key UI text below
+// non-color values, deprecated keys, or key UI text and syntax colors below
 // its contrast floor.
 const fs = require("fs");
 const path = require("path");
@@ -79,10 +79,12 @@ VARIANTS.forEach((v, n) => {
   // WCAG contrast of key foregrounds against the base background.
   const c = theme.colors;
   const bg = c["editor.background"];
-  const comment = theme.tokenColors.find((t) => t.name === "Comment").settings.foreground;
+  const tokenFg = (name) => theme.tokenColors.find((t) => t.name === name).settings.foreground;
   const MIN = [
     ["editor.foreground", c["editor.foreground"], bg, 7],
-    ["comment", comment, bg, 4.5],
+    ["comment", tokenFg("Comment"), bg, 4.5],
+    ["comment //", tokenFg("Double-Slashed Comment"), bg, 4.5],
+    ["list.warningForeground", c["list.warningForeground"], bg, 4.5],
     ["editorLineNumber.foreground", c["editorLineNumber.foreground"], bg, 3],
     ["tab.inactiveForeground", c["tab.inactiveForeground"], bg, 4.5],
     ["statusBar.foreground", c["statusBar.foreground"], bg, 4.5],
@@ -93,6 +95,13 @@ VARIANTS.forEach((v, n) => {
   for (const [name, fg, back, min] of MIN) {
     const r = ratio(fg, back);
     if (r < min) err(`contrast ${name}: ${r.toFixed(2)} < ${min}`);
+  }
+  // Every opaque syntax color drawn on the editor background stays readable.
+  for (const t of theme.tokenColors) {
+    const s = t.settings || {};
+    if (!s.foreground || s.background || !/^#[0-9a-f]{6}(ff)?$/i.test(s.foreground)) continue;
+    const r = ratio(s.foreground, bg);
+    if (r < 3) err(`contrast token "${t.name}": ${r.toFixed(2)} < 3`);
   }
   summary.push(`✓ ${v.name}: ${Object.keys(c).length} colors, ${theme.tokenColors.length} token rules`);
 });
