@@ -1,6 +1,29 @@
 # Duskfeather
 
+[![VS Code Marketplace](https://img.shields.io/visual-studio-marketplace/v/anngth.duskfeather?label=VS%20Code%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=anngth.duskfeather)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/anngth.duskfeather)](https://marketplace.visualstudio.com/items?itemName=anngth.duskfeather)
+
 A VS Code theme based on **Night Owl (No Italics)**, in dark and light. Deep cards sit on a slightly lighter shell, borders are a single gray, the accent is VS Code blue, and nothing is italic. Syntax colors stay as in Night Owl, with comments lifted for contrast.
+
+## Install
+
+1. In VS Code, open the Extensions view (`Cmd+Shift+X` on macOS, `Ctrl+Shift+X` on Windows and Linux).
+2. Search for **Duskfeather** (publisher **anngth**) and click *Install*.
+3. Run *Preferences: Color Theme* (`Cmd+K Cmd+T` / `Ctrl+K Ctrl+T`) and pick **Duskfeather** or **Duskfeather Light**.
+
+Or press `Cmd+P` / `Ctrl+P` and run:
+
+```
+ext install anngth.duskfeather
+```
+
+From a terminal:
+
+```bash
+code --install-extension anngth.duskfeather
+```
+
+You can also install it from the [Marketplace page](https://marketplace.visualstudio.com/items?itemName=anngth.duskfeather).
 
 ## Duskfeather
 
@@ -10,12 +33,7 @@ A VS Code theme based on **Night Owl (No Italics)**, in dark and light. Deep car
 
 ![Duskfeather Light](images/light.png)
 
-## Install
-
-1. Open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`), search for **Duskfeather** and click *Install*.
-2. Run *Preferences: Color Theme* and pick **Duskfeather** or **Duskfeather Light**.
-
-### From source
+## Build from source
 
 ```bash
 npm run package
