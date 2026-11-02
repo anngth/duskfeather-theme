@@ -1,7 +1,8 @@
 name: publish
 
-# Push a tag like v1.0.1 to publish. Uses Marketplace Trusted Publishing (OIDC),
-# so no PAT secret is needed. The policy on the Marketplace must name this file.
+# Push a tag like v1.0.1 to publish. Uses Trusted Publishing (OIDC) on both the
+# VS Code Marketplace and Open VSX, so no token secret is needed. Each registry's
+# trusted publisher entry must name this file.
 on:
   push:
     tags:
@@ -21,4 +22,11 @@ jobs:
       - name: Tag matches package.json version
         run: test "${GITHUB_REF_NAME#v}" = "$(node -p 'require("./package.json").version')"
       - run: node scripts/check.js
-      - run: npx --yes @vscode/vsce publish --oidc
+      - run: npx --yes @vscode/vsce package -o duskfeather.vsix
+      - name: VS Code Marketplace
+        run: npx --yes @vscode/vsce publish --oidc --packagePath duskfeather.vsix --skip-duplicate
+      # Open VSX only accepts a trusted publisher after a first version exists,
+      # so this step stays off until the repository variable is set to true.
+      - name: Open VSX
+        if: vars.OPENVSX_TRUSTED_PUBLISHING == 'true'
+        run: npx --yes ovsx publish --packagePath duskfeather.vsix --trusted-publishing --skip-duplicate
