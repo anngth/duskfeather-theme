@@ -1,0 +1,12 @@
+.vscode/**
+.git/**
+.gitignore
+palette.json
+themes/base-night-owl-noitalic.json
+*.vsix
+scripts/**
+.github/**
+COLOR-CHANGES*.md
+themes/base-night-owl-light-noitalic.json
+demo/**
+images/icon.svg

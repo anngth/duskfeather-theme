@@ -1,0 +1,54 @@
+{
+  "name": "duskfeather",
+  "displayName": "Duskfeather",
+  "description": "Night Owl (No Italics), reworked: deep cards on a navy shell, gray borders and a VS Code blue accent. Dark and light variants, no italics.",
+  "version": "1.0.0",
+  "publisher": "anngth",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anngth/duskfeather-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anngth/duskfeather-theme/issues"
+  },
+  "homepage": "https://github.com/anngth/duskfeather-theme#readme",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "Duskfeather",
+    "Theme",
+    "Dark Theme",
+    "Light Theme",
+    "Night Owl",
+    "No Italics"
+  ],
+  "galleryBanner": {
+    "color": "#010C15",
+    "theme": "dark"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "check": "node scripts/check.js",
+    "package": "node scripts/build.js && node scripts/check.js && npx @vscode/vsce package"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Duskfeather",
+        "uiTheme": "vs-dark",
+        "path": "./themes/duskfeather-color-theme.json"
+      },
+      {
+        "label": "Duskfeather Light",
+        "uiTheme": "vs",
+        "path": "./themes/duskfeather-light-color-theme.json"
+      }
+    ]
+  }
+}
