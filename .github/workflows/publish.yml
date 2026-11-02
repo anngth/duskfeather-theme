@@ -1,0 +1,24 @@
+name: publish
+
+# Push a tag like v1.0.1 to publish. Uses Marketplace Trusted Publishing (OIDC),
+# so no PAT secret is needed. The policy on the Marketplace must name this file.
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tag matches package.json version
+        run: test "${GITHUB_REF_NAME#v}" = "$(node -p 'require("./package.json").version')"
+      - run: node scripts/check.js
+      - run: npx --yes @vscode/vsce publish --oidc
