@@ -25,8 +25,5 @@ jobs:
       - run: npx --yes @vscode/vsce package -o duskfeather.vsix
       - name: VS Code Marketplace
         run: npx --yes @vscode/vsce publish --oidc --packagePath duskfeather.vsix --skip-duplicate
-      # Open VSX only accepts a trusted publisher after a first version exists,
-      # so this step stays off until the repository variable is set to true.
       - name: Open VSX
-        if: vars.OPENVSX_TRUSTED_PUBLISHING == 'true'
         run: npx --yes ovsx publish --packagePath duskfeather.vsix --trusted-publishing --skip-duplicate
