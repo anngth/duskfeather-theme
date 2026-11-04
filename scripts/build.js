@@ -122,8 +122,8 @@ function overrides(p) {
 
   return {
     contrastBorder: p.border,
-    // Keyboard focus outline, so Tab navigation stays visible.
-    focusBorder: p.accent,
+    // Focus outline is turned off.
+    focusBorder: "#00000000",
     // Validation messages; upstream light uses the body text color.
     errorForeground: p.error,
     "editorWarning.foreground": p.warning,

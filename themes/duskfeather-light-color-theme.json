@@ -4,7 +4,7 @@
   "semanticHighlighting": false,
   "colors": {
     "foreground": "#403f53",
-    "focusBorder": "#005FB8",
+    "focusBorder": "#00000000",
     "errorForeground": "#E64D49",
     "selection.background": "#7a8181ad",
     "descriptionForeground": "#403f53",
