@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+- Turn off the keyboard focus border (`focusBorder`) in both variants.
+
 ## 1.0.2
 
 - Smaller package (about 60 KB instead of 700 KB): README screenshots now load from GitHub instead of being bundled.
